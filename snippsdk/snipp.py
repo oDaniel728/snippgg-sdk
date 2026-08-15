@@ -13,7 +13,7 @@ class Snipp():
     def __init__(self, API_KEY: str) -> None:
         self.API_KEY = API_KEY
 
-    def get(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
+    def __get(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
         return httpx.get(f"{self.__base_path}/{url}", params=params, headers={"api-key": self.API_KEY} | headers)
 
     @overload
@@ -39,7 +39,7 @@ class Snipp():
             elif posts_limit < 0:
                 raise ValueError("Posts limit must be greater than or equal to 0")
             
-        data = self.get(
+        data = self.__get(
             f"users/{user_id}", 
             params=_remove_nil_values(
                 {
@@ -53,5 +53,5 @@ class Snipp():
         return UserProfile(data.json())
 
     def get_usage_history(self) -> UsageHistory:
-        data = self.get("usage-history")
+        data = self.__get("usage-history")
         return UsageHistory(data.json())
