@@ -10,7 +10,7 @@ from snippsdk.users.usagehistory.usagehistory import UsageHistory
 def _remove_nil_values(dict: dict) -> dict:
     return {k: v for k, v in dict.items() if v is not None}
 
-class Snipp():
+class SnippClient():
     __base_path = "https://api.snipp.gg"
     def __init__(self, API_KEY: str) -> None:
         self.API_KEY = API_KEY

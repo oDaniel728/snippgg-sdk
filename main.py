@@ -1,12 +1,12 @@
 import dotenv
 import os
 
-from snippsdk.snipp import Snipp
+from snippsdk.snipp import SnippClient
 
 dotenv.load_dotenv()
 
 def main():
-    snipp = Snipp(os.getenv("API_KEY") or '')
+    snipp = SnippClient(os.getenv("API_KEY") or '')
     print("perfil daniel:")
     print(snipp.get_user("@me").json)
 
