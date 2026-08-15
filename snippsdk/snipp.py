@@ -14,14 +14,14 @@ class Snipp():
     def __init__(self, API_KEY: str) -> None:
         self.API_KEY = API_KEY
 
-    def __request(self, method: str, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
-        return httpx.request(method, f"{self.__base_path}/{url}", params=params, headers={"api-key": self.API_KEY} | headers)
+    def __request(self, method: str, url: str, params: dict = {}, json: dict | None = None, headers: dict = {}) -> httpx.Response:
+        return httpx.request(method, f"{self.__base_path}/{url}", params=params, json=json, headers={"api-key": self.API_KEY} | headers)
 
     def __get(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
         return self.__request("GET", url, params=params, headers=headers)
 
-    def __post(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
-        return self.__request("POST", url, params=params, headers=headers)
+    def __post(self, url: str, params: dict = {}, json: dict | None = None, headers: dict = {}) -> httpx.Response:
+        return self.__request("POST", url, params=params, json=json, headers=headers)
 
     @overload
     def get_user(
@@ -70,3 +70,9 @@ class Snipp():
         )
         return UserAnalytics(data.json())
 
+    def report_user(self, user_id: int, reason: Optional[str] = None) -> bool | None:
+        if reason and len(reason) > 200:
+            raise ValueError("Reason cannot exceed 200 characters")
+
+        body = _remove_nil_values({"targetUserId": str(user_id), "reason": reason})
+        return self.__post("report-user", json=body).json().get("success")
