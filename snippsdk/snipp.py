@@ -2,6 +2,7 @@ from typing import Literal, Optional, overload
 
 import httpx
 
+from snippsdk.analytics.useranalytics import UserAnalytics
 from snippsdk.profile.profile import MyUserProfile, UserProfile
 from snippsdk.usagehistory.usagehistory import UsageHistory
 
@@ -55,3 +56,10 @@ class Snipp():
     def get_usage_history(self) -> UsageHistory:
         data = self.__get("usage-history")
         return UsageHistory(data.json())
+
+    def get_analytics(self, range: Literal["7", "30", "90", "365"] = "30") -> UserAnalytics:
+        data = self.__get(
+            "analytics",
+            params=_remove_nil_values({"range": int(range)})
+        )
+        return UserAnalytics(data.json())
