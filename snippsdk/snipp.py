@@ -14,8 +14,14 @@ class Snipp():
     def __init__(self, API_KEY: str) -> None:
         self.API_KEY = API_KEY
 
+    def __request(self, method: str, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
+        return httpx.request(method, f"{self.__base_path}/{url}", params=params, headers={"api-key": self.API_KEY} | headers)
+
     def __get(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
-        return httpx.get(f"{self.__base_path}/{url}", params=params, headers={"api-key": self.API_KEY} | headers)
+        return self.__request("GET", url, params=params, headers=headers)
+
+    def __post(self, url: str, params: dict = {}, headers: dict = {}) -> httpx.Response:
+        return self.__request("POST", url, params=params, headers=headers)
 
     @overload
     def get_user(
@@ -63,3 +69,4 @@ class Snipp():
             params=_remove_nil_values({"range": int(range)})
         )
         return UserAnalytics(data.json())
+
