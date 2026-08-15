@@ -7,6 +7,27 @@ from snippsdk.users.profile.usersocials import UserSocials
 from snippsdk.users.profile.userupload import UserUpload
 
 class UserProfile():
+    """
+    Represents an user's profile.
+
+    Attributes:
+        userid (str): The user's id.
+        username (str): The user's username.
+        avatar (str/url): The user's avatar.
+        banner (str/url): The user's banner.
+        nickname (str): The user's nickname.
+        bio (str?): The user's bio.
+        socials (UserSocials?): The user's socials.
+        plus (bool): Whether the user is a plus user.
+        enterprise (bool): Whether the user is an enterprise user.
+        suspended (bool): Whether the user is suspended.
+        created (str): The date the user was created.
+        custom_embed (UserCustomEmbed?): The user's custom embed.
+        badges (UserBadges): The user's badges.
+        public_uploads (UserUpload[]): The user's public uploads.
+        blocked_by_you (bool?): Whether the user is blocked by you.
+        json (dict): The raw JSON data.
+    """
     def __init__(self, json: dict) -> None:
         self.userid: str = json["user"]["id"]
         self.username: str = json["user"]["username"]
@@ -35,6 +56,30 @@ class UserProfile():
         self.json = json
 
 class MyUserProfile(UserProfile):
+    """
+    Represents your user's profile.
+
+    Attributes:
+        uploads (int): The number of uploads the user has.
+        api_key (str): The user's API key.
+        limits (UserLimits): The user's limits. 
+        userid (str): The user's id.
+        username (str): The user's username.
+        avatar (str/url): The user's avatar.
+        banner (str/url): The user's banner.
+        nickname (str): The user's nickname.
+        bio (str?): The user's bio.
+        socials (UserSocials?): The user's socials.
+        plus (bool): Whether the user is a plus user.
+        enterprise (bool): Whether the user is an enterprise user.
+        suspended (bool): Whether the user is suspended.
+        created (str): The date the user was created.
+        custom_embed (UserCustomEmbed?): The user's custom embed.
+        badges (UserBadges): The user's badges.
+        public_uploads (UserUpload[]): The user's public uploads.
+        blocked_by_you (bool?): Whether the user is blocked by you.
+        json (dict): The raw JSON data.
+    """
     def __init__(self, json: dict) -> None:
         super().__init__(json)
         self.uploads: int = json["user"]["uploads"]
