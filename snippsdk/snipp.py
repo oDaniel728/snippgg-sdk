@@ -2,7 +2,7 @@ from typing import Literal, Optional, overload
 
 import httpx
 
-from snippsdk.profile import MyUserProfile, UserProfile
+from snippsdk.profile.profile import MyUserProfile, UserProfile
 
 def _remove_nil_values(dict: dict) -> dict:
     return {k: v for k, v in dict.items() if v is not None}

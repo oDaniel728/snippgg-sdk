@@ -1,10 +1,10 @@
 from typing import Optional
 
-from snippsdk.userbadges import UserBadges
-from snippsdk.usercustomembed import UserCustomEmbed
-from snippsdk.userlimits import UserLimit
-from snippsdk.usersocials import UserSocials
-from snippsdk.userupload import UserUpload
+from snippsdk.profile.userbadges import UserBadges
+from snippsdk.profile.usercustomembed import UserCustomEmbed
+from snippsdk.profile.userlimits import UserLimit
+from snippsdk.profile.usersocials import UserSocials
+from snippsdk.profile.userupload import UserUpload
 
 class UserProfile():
     def __init__(self, json: dict) -> None:
