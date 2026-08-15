@@ -3,6 +3,7 @@ from typing import Literal, Optional, overload
 import httpx
 
 from snippsdk.analytics.useranalytics import UserAnalytics
+from snippsdk.meta.region.region import Region
 from snippsdk.profile.profile import MyUserProfile, UserProfile
 from snippsdk.usagehistory.usagehistory import UsageHistory
 
@@ -76,3 +77,6 @@ class Snipp():
 
         body = _remove_nil_values({"targetUserId": str(user_id), "reason": reason})
         return self.__post("report-user", json=body).json().get("success")
+
+    def get_region(self) -> Region:
+        return Region(self.__get("region").json())
