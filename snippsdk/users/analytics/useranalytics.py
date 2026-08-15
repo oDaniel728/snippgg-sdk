@@ -1,7 +1,7 @@
-from snippsdk.analytics.analyticsbuckets import AnalyticsBuckets
-from snippsdk.analytics.analyticsdeltas import AnalyticsDeltas
-from snippsdk.analytics.analyticsseries import AnalyticsSeries
-from snippsdk.analytics.analyticstotals import AnalyticsTotals
+from snippsdk.users.analytics.analyticsbuckets import AnalyticsBuckets
+from snippsdk.users.analytics.analyticsdeltas import AnalyticsDeltas
+from snippsdk.users.analytics.analyticsseries import AnalyticsSeries
+from snippsdk.users.analytics.analyticstotals import AnalyticsTotals
 
 
 class UserAnalytics():

@@ -1,5 +1,5 @@
-from snippsdk.usagehistory.historystats import HistoryStats
-from snippsdk.usagehistory.usagehistorychunk import UsageHistoryChunk
+from snippsdk.users.usagehistory.historystats import HistoryStats
+from snippsdk.users.usagehistory.usagehistorychunk import UsageHistoryChunk
 
 class UsageHistory():
     def __init__(self, json: dict) -> None:
